@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import Popup from 'reactjs-popup'
-import styles from '../styles/App.module.css'
+import styles from '../styles/Game_1.module.css'
 import destroyedTargetImage from '../assets/images/pot2.png'
 import targetImage from '../assets/images/pot1.png'
 
@@ -38,7 +38,7 @@ function Game_01() {
       ) {
         const result = CheckResult(index)
 
-        openPopup()
+        // openPopup()
 
         if (result) {
           setScore((prevScore) => prevScore + 1)
@@ -60,6 +60,8 @@ function Game_01() {
     element.style.left = position
   }
   const ResatrtGame = () => {
+    console.log('restart')
+    SetPoupMassage('')
     const targets = document.querySelectorAll(`.${styles.target}`)
     targets.forEach((element) => {
       element.src = targetImage
@@ -97,14 +99,16 @@ function Game_01() {
         <img src={image} alt="" className={styles.target} id={styles.target4} />
         <div className={styles.hammer} id={styles.hammer}></div>
       </div>
-      <button className={styles.button} onClick={handleStrike}>
-        Strike
-      </button>
+      <div className={styles.buttonContainer}>
+        <button className={styles.button} onClick={handleStrike}>
+          Strike
+        </button>
 
-      <button className={styles.button} onClick={ResatrtGame}>
-        Try Again
-      </button>
-      <div className={styles.score}>Score: {score}</div>
+        <button className={styles.button} onClick={ResatrtGame}>
+          Try Again
+        </button>
+        <div className={styles.score}>{popupMsg}</div>
+      </div>
     </div>
   )
 }
