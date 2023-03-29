@@ -1,0 +1,85 @@
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+.container {
+  background-image: url('../assets/images/bg.png');
+  background-size: cover;
+  position: relative;
+  width: 400px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.target {
+  position: absolute;
+  width: 50px;
+  /* height: 50px; */
+  top: 20%;
+}
+#target1 {
+  left: 40px;
+}
+
+#target2 {
+  left: 120px;
+}
+
+#target3 {
+  left: 200px;
+}
+
+#target4 {
+  left: 280px;
+}
+
+.hammer {
+  position: absolute;
+  top: 50px;
+  width: 50px;
+  height: 200px;
+  background-image: url('../assets/images/stick.png');
+
+  background-size: cover;
+
+  animation: move-hammer 2s ease-in-out infinite alternate;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+.hammerStrike {
+  animation: strike-hammer 0.3s forwards;
+}
+
+@keyframes move-hammer {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(300px);
+  }
+}
+@keyframes strike-hammer {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(10deg);
+  }
+}
+
+.button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: green;
+  color: white;
+  border: none;
+}
+
+.score {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+}
