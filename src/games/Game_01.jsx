@@ -27,7 +27,7 @@ function Game_01() {
     if (round < 1) {
       setGameOver(true)
     }
-  }, [score])
+  }, [round])
   function getCurrentPosition(element) {
     const style = window.getComputedStyle(element)
     const matrix = new DOMMatrixReadOnly(style.transform)
@@ -73,6 +73,7 @@ function Game_01() {
   const ResatrtGame = () => {
     PlayAgain()
     setRound(3)
+    setScore(0)
   }
   const PlayAgain = () => {
     setGameOver(false)
