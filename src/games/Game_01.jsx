@@ -2,21 +2,32 @@ import React, { useRef, useState, useEffect } from 'react'
 import Popup from 'reactjs-popup'
 import styles from '../styles/Game_1.module.css'
 import destroyedTargetImage from '../assets/images/pot2.png'
+import candyPotImage from '../assets/images/pot-candy.png'
 import targetImage from '../assets/images/pot1.png'
+import GamePopUp from '../component/GameOverPopUp'
 
 function Game_01() {
   const [image, setImage] = useState(targetImage)
+  const [strikeStatus, setStrikeButtonStatus] = useState(false)
   const [destroyedImage, setDesImage] = useState('')
   const [hammerPosition, setHammerPosition] = useState(0)
   const [hammerElement, setHammerElement] = useState()
-  const [score, setScore] = useState(0)
+
   const [popupMsg, SetPoupMassage] = useState()
+  //point system
+  const [gameOver, setGameOver] = useState(false)
+  const [score, setScore] = useState(0)
+  const [round, setRound] = useState(3)
 
   const ref = useRef()
   const openPopup = () => ref.current.open()
   const closePopup = () => ref.current.close()
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    if (round < 1) {
+      setGameOver(true)
+    }
+  }, [score])
   function getCurrentPosition(element) {
     const style = window.getComputedStyle(element)
     const matrix = new DOMMatrixReadOnly(style.transform)
@@ -24,11 +35,10 @@ function Game_01() {
   }
 
   const handleStrike = () => {
-    console.log('striked clicked')
     const hammer = document.getElementById(styles.hammer)
     const targets = document.querySelectorAll(`.${styles.target}`)
     const hammerPosition = getCurrentPosition(hammer)
-    hammer.style.transform = 'rotate(10deg)'
+
     targets.forEach((element, index) => {
       if (
         hammerPosition >= element.offsetLeft &&
@@ -38,17 +48,18 @@ function Game_01() {
 
         PlayStrikeAnimation(element)
         if (result) {
-          setScore((prevScore) => prevScore + 1)
-
+          ChangeImage(element, candyPotImage)
+          setScore((prevScore) => prevScore + 100)
           SetPoupMassage('you Won!')
         } else {
+          ChangeImage(element, destroyedTargetImage)
+          setRound((prevScore) => prevScore - 1)
           SetPoupMassage('you Lost! Try again')
         }
 
-        ChangeImage(element)
-
         StopAnimation(hammer)
         setHammerElement(hammer)
+        setStrikeButtonStatus(true)
         return
       }
     })
@@ -60,7 +71,12 @@ function Game_01() {
     }, 300)
   }
   const ResatrtGame = () => {
-    console.log('restart')
+    PlayAgain()
+    setRound(3)
+  }
+  const PlayAgain = () => {
+    setGameOver(false)
+    setStrikeButtonStatus(false)
     SetPoupMassage('')
     const targets = document.querySelectorAll(`.${styles.target}`)
     targets.forEach((element) => {
@@ -71,15 +87,13 @@ function Game_01() {
     }
 
     setImage(targetImage)
-    closePopup()
-    setScore(0)
   }
   const StopAnimation = (element) => {
     element.style.animationPlayState = 'paused'
   }
-  const ChangeImage = (element) => {
-    setDesImage(destroyedTargetImage)
-    element.src = destroyedTargetImage
+  const ChangeImage = (element, image) => {
+    setDesImage(image)
+    element.src = image
   }
   const CheckResult = (number) => {
     let randomNum = Math.floor(Math.random() * 4)
@@ -90,9 +104,8 @@ function Game_01() {
   return (
     <div className={styles.App}>
       <div className={styles.container}>
-        <Popup ref={ref}>
-          <div>{popupMsg}</div>
-        </Popup>
+        <GamePopUp show={gameOver} score={score} resetButton={ResatrtGame} />
+
         <img src={image} alt="" className={styles.target} id={styles.target1} />
         <img src={image} alt="" className={styles.target} id={styles.target2} />
         <img src={image} alt="" className={styles.target} id={styles.target3} />
@@ -100,14 +113,30 @@ function Game_01() {
         <div className={styles.hammer} id={styles.hammer}></div>
       </div>
       <div className={styles.buttonContainer}>
-        <button className={styles.button} onClick={handleStrike}>
-          Strike
-        </button>
+        {strikeStatus == true ? (
+          <button
+            className={styles.button}
+            onClick={() => {
+              PlayAgain()
+            }}
+          >
+            Try Again
+          </button>
+        ) : (
+          <button
+            disabled={strikeStatus}
+            className={styles.button}
+            onClick={handleStrike}
+          >
+            Strike
+          </button>
+        )}
 
-        <button className={styles.button} onClick={ResatrtGame}>
-          Try Again
-        </button>
-        <div className={styles.score}>{popupMsg}</div>
+        <div className={styles.count}>
+          Score: {score} Round: {round}
+        </div>
+
+        <div className={styles.popup}>{popupMsg}</div>
       </div>
     </div>
   )
