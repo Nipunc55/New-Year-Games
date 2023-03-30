@@ -28,9 +28,7 @@ function Game_01() {
     const hammer = document.getElementById(styles.hammer)
     const targets = document.querySelectorAll(`.${styles.target}`)
     const hammerPosition = getCurrentPosition(hammer)
-
-    PlayStrikeAnimation(hammer, hammerPosition)
-
+    hammer.style.transform = 'rotate(10deg)'
     targets.forEach((element, index) => {
       if (
         hammerPosition >= element.offsetLeft &&
@@ -38,8 +36,7 @@ function Game_01() {
       ) {
         const result = CheckResult(index)
 
-        // openPopup()
-
+        PlayStrikeAnimation(element)
         if (result) {
           setScore((prevScore) => prevScore + 1)
 
@@ -56,8 +53,11 @@ function Game_01() {
       }
     })
   }
-  const PlayStrikeAnimation = (element, position) => {
-    element.style.left = position
+  const PlayStrikeAnimation = (element) => {
+    element.classList.add(styles.hammerStrike)
+    setTimeout(() => {
+      element.classList.remove(styles.hammerStrike)
+    }, 300)
   }
   const ResatrtGame = () => {
     console.log('restart')
