@@ -127,4 +127,13 @@
     width: 15%;
     height: 60%;
   }
+
+  @keyframes move-hammer {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(600%);
+    }
+  }
 }
