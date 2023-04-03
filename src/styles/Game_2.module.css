@@ -1,0 +1,66 @@
+.container {
+  background-image: url('../assets/images/bg.png');
+  background-size: cover;
+  background-color: rgb(0, 0, 0);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+.player {
+  width: 400px;
+}
+.gameWindow {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gameBack {
+  width: 800px;
+  background-image: url('../assets/images/game_2/bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonContainer {
+  position: absolute;
+  margin-top: 10%;
+}
+
+@media (max-width: 900px) {
+  .player {
+    width: 300px !important;
+  }
+  .gameBack {
+    width: 600px;
+  }
+}
+@media (max-width: 600px) {
+  .player {
+    width: 200px !important;
+  }
+  .gameBack {
+    width: 400px;
+  }
+}
+@media (max-width: 500px) {
+  .player {
+    width: 150px !important;
+  }
+  .gameBack {
+    width: 300px;
+  }
+}
+@media (max-width: 300px) {
+  .player {
+    width: 100px !important;
+  }
+  .gameBack {
+    width: 200px;
+  }
+}

@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react'
-import Popup from 'reactjs-popup'
 import styles from '../styles/Game_1.module.css'
 import destroyedTargetImage from '../assets/images/pot2.png'
 import candyPotImage from '../assets/images/pot-candy.png'
 import targetImage from '../assets/images/pot1.png'
 import GamePopUp from '../component/GameOverPopUp'
+import Score from '../component/Score'
 
 function Game_01() {
   const [image, setImage] = useState(targetImage)
@@ -113,32 +113,13 @@ function Game_01() {
         <img src={image} alt="" className={styles.target} id={styles.target4} />
         <div className={styles.hammer} id={styles.hammer}></div>
       </div>
-      <div className={styles.buttonContainer}>
-        {strikeStatus == true ? (
-          <button
-            className={styles.button}
-            onClick={() => {
-              PlayAgain()
-            }}
-          >
-            Try Again
-          </button>
-        ) : (
-          <button
-            disabled={strikeStatus}
-            className={styles.button}
-            onClick={handleStrike}
-          >
-            Strike
-          </button>
-        )}
-
-        <div className={styles.count}>
-          Score: {score} Round: {round}
-        </div>
-
-        <div className={styles.popup}>{popupMsg}</div>
-      </div>
+      <Score
+        strikeStatus={strikeStatus}
+        PlayAgain={PlayAgain}
+        HandleStrike={handleStrike}
+        score={score}
+        round={round}
+      />
     </div>
   )
 }

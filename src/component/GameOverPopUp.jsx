@@ -14,7 +14,7 @@ function GamePopUp(props) {
           {' '}
           <div className={styles.popupContainer} id="popup">
             <div className={styles.popup}>
-              <h1>Game Over</h1>
+              <h1>{props.status}</h1>
               <h2>Your score</h2>
               <p>
                 {props.score}

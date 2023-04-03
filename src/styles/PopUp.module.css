@@ -21,6 +21,10 @@
   border-radius: 5px;
   text-align: center;
   position: relative; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .popup h2 {
