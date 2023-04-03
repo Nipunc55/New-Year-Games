@@ -170,8 +170,14 @@ function Game_02() {
                 </>
               )}
             </div>
-            <img className={styles.player} src={leftPlayer} />
-            <img className={styles.player} src={rightPlayer} />
+            <img
+              className={`${styles.player} ${styles.playerLeft}`}
+              src={leftPlayer}
+            />
+            <img
+              className={`${styles.player} ${styles.playerRight}`}
+              src={rightPlayer}
+            />
           </div>
         </div>
       </div>
