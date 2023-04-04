@@ -8,6 +8,7 @@ import hitImgRight from '../assets/images/game_2/hit-right.png'
 import idleImgRight from '../assets/images/game_2/idle-right.png'
 import duckImgRight from '../assets/images/game_2/duck-right.png'
 import GamePopUp from '../component/GameOverPopUp'
+import LoadingBar from '../component/LoadingBar'
 
 const { idle, hit, duck } = { idle: 'idle', hit: 'hit', duck: 'duck' }
 
@@ -136,6 +137,7 @@ function Game_02() {
           score={score}
           round={round}
         />
+        <LoadingBar life={round} enemy={score} />
         <GamePopUp
           show={gameOver}
           score={score}
