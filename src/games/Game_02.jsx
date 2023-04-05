@@ -33,7 +33,7 @@ function Game_02() {
       intervalId = setInterval(() => {
         setTimeout(() => {
           Hit(hitImgRight, idleImgRight, setRightPlayer, setPlayerStatusR, hit)
-        }, 500)
+        }, 0)
         setTimeout(() => {
           Hit(
             duckImgRight,
@@ -42,9 +42,10 @@ function Game_02() {
             setPlayerStatusR,
             duck,
             3000,
+            true,
           )
-        }, 1500)
-      }, 2000)
+        }, 400)
+      }, 3000)
     } else {
       clearInterval(intervalId)
     }
@@ -110,9 +111,9 @@ function Game_02() {
     resetTime,
     isRetun,
   ) => {
-    let timeOut = resetTime || 300
-    let returnStatus = isRetun || false
-
+    let timeOut = resetTime ?? 300
+    let returnStatus = isRetun ?? false
+    console.log(timeOut, returnStatus)
     setStatus(status)
     setPlayer(hitImg)
     if (!returnStatus) {
