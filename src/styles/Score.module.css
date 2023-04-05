@@ -17,10 +17,13 @@
   display: inline;
 }
 .count {
-  position: absolute;
+  position: fixed;
   font-weight: bold;
   right: 5%;
-  top: 50%;
+  top: 5%;
+  background-color: rgb(252, 44, 44);
+  border-radius: 30%;
+  padding: 1%;
   /* display: inline; */
 }
 

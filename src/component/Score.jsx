@@ -33,11 +33,11 @@ function Score(props) {
             Strike
           </button>
         )}
-
-        <div className={styles.count}>
-          Score: {props.score} Round: {props.round}
+        <div className={styles.scoreCover}>
+          <div className={styles.count}>
+            Score: {props.score} Round: {props.round}
+          </div>
         </div>
-
         <div className={styles.popup}>{props.popupMsg}</div>
       </div>
     </>
