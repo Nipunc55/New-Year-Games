@@ -11,6 +11,7 @@ import GamePopUp from '../component/GameOverPopUp'
 import LoadingBar from '../component/LoadingBar'
 
 const { idle, hit, duck } = { idle: 'idle', hit: 'hit', duck: 'duck' }
+const timeIntervals = [400, 600, 1000, 1500, 2000, 3000, 2500]
 
 function Game_02() {
   const [leftPlayer, setLeftPlayer] = useState(idleImgLeft)
@@ -26,11 +27,17 @@ function Game_02() {
 
   useEffect(() => {
     let intervalId
-    let hitFrequnt = 1000
+    let hitFrequnt =
+      timeIntervals[Math.floor(Math.random() * timeIntervals.length)]
+    console.log('uvgucv')
     if (!gameOver && gameStart) {
-      hitFrequnt = Math.random() * 1000
-
+      // hitFrequnt = Math.random() * 1000
+      console.log()
       intervalId = setInterval(() => {
+        hitFrequnt =
+          timeIntervals[Math.floor(Math.random() * timeIntervals.length)]
+        console.log(hitFrequnt)
+
         setTimeout(() => {
           Hit(hitImgRight, idleImgRight, setRightPlayer, setPlayerStatusR, hit)
         }, 0)
@@ -45,7 +52,7 @@ function Game_02() {
             true,
           )
         }, 400)
-      }, 3000)
+      }, hitFrequnt)
     } else {
       clearInterval(intervalId)
     }
@@ -113,7 +120,7 @@ function Game_02() {
   ) => {
     let timeOut = resetTime ?? 300
     let returnStatus = isRetun ?? false
-    console.log(timeOut, returnStatus)
+
     setStatus(status)
     setPlayer(hitImg)
     if (!returnStatus) {
