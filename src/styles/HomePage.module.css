@@ -1,0 +1,7 @@
+.background {
+  background-image: url('../assets/images/bg.png');
+  background-size: cover;
+}
+.button {
+  background-color: brown;
+}

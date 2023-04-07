@@ -16,10 +16,11 @@ export default function Game_03() {
     image.onload = () => {
       setImageWidth(image.naturalWidth)
       setImageHeight(image.naturalHeight)
-      const blankSpotX = 196 // replace with actual x-coordinate of blank spot
-      const blankSpotY = 107 // replace with actual y-coordinate of blank spot
+      const blankSpotX = 210 // replace with actual x-coordinate of blank spot
+      const blankSpotY = 90 // replace with actual y-coordinate of blank spot
       const containerWidth = document.getElementById('container').offsetWidth
       const containerHeight = document.getElementById('container').offsetHeight
+
       const blankSpotXPercent = (blankSpotX / image.naturalWidth) * 100
       const blankSpotYPercent = (blankSpotY / image.naturalHeight) * 100
       const blankSpotXContainer = (containerWidth * blankSpotXPercent) / 100
@@ -29,17 +30,64 @@ export default function Game_03() {
     }
   }, [])
 
-  useEffect(() => {
-    console.log(('imageWidth', blankSpotXContainer), blankSpotYContainer)
-  }, [blankSpotYContainer])
+  const handleClick = (event) => {
+    // Get the mouse position relative to the viewport
 
+    const eyeElement = document.getElementById('eye-image')
+    StopAnimation(eyeElement)
+    const x = event.clientX
+    const y = event.clientY
+    console.log('initial position :', blankSpotXContainer, blankSpotYContainer)
+    // Log the mouse position to the console
+    console.log(`Mouse clicked at (${x}, ${y})`)
+    console.log(
+      'current position of eye:',
+      getCurrentPositionOf(eyeElement),
+      eyeElement.offsetWidth,
+    )
+    const currentEyePositon = getCurrentPositionOf(eyeElement)
+    if (
+      currentEyePositon <= blankSpotXContainer + eyeElement.offsetWidth / 2 &&
+      currentEyePositon >= blankSpotXContainer
+    ) {
+      console.log('success')
+    } else {
+      console.log('does not match')
+    }
+  }
+  function getCurrentPositionOf(element) {
+    const container = document.getElementById('container')
+
+    const rect = element.getBoundingClientRect()
+    const left = rect.left - container.getBoundingClientRect().left
+    return left // the current X position of the element
+  }
+  const StopAnimation = (element) => {
+    element.style.animationPlayState = 'paused'
+  }
+
+  // useEffect(() => {
+  //   let direction = 1
+  //   let speed = 1
+  //   let position = 0
+  //   const animatePendulum = () => {
+  //     position += 0.01
+  //     console.log('animating')
+  //     setBlankSpotXContainer((preX) => {
+  //       console.log(preX)
+  //       preX + position
+  //     })
+  //     window.requestAnimationFrame(animatePendulum)
+  //   }
+  //   animatePendulum()
+  // }, [])
   return (
-    <div className={styles.backGround}>
-      <div className={styles.gameWindow}>
+    <div onClick={handleClick} className={styles.backGround}>
+      <div id="container" className={styles.gameWindow}>
         <img
-          id="container"
+          id="eye-image"
           style={{
-            position: 'relative',
+            position: 'absolute',
             left: blankSpotXContainer,
             top: blankSpotYContainer,
           }}

@@ -11,7 +11,7 @@
 }
 .gameWindow {
   width: 90%;
-  padding-top: 40%; /* This is equivalent to 438/668 * 100% */
+  padding-top: 45%; /* This is equivalent to 438/668 * 100% */
   background-image: url('../assets/images/game_3/board.png');
   background-size: contain;
   background-repeat: no-repeat;
@@ -19,24 +19,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 .movingItem {
-  position: absolute;
   top: 25%;
   left: 50%;
-  /* animation: move-horizontal 2s ease-in-out infinite alternate; */
+  height: 7%;
+  width: 3%;
+  animation: move-horizontal 2s ease-in-out infinite alternate;
 }
 @media (max-width: 1000px) {
-  .gameWindow {
-    padding-top: 60%; /* This is equivalent to 438/668 * 100% */
-  }
   .movingItem {
     top: 40%;
   }
 }
 @keyframes move-horizontal {
   from {
-    transform: translateX(-1000%);
+    transform: translateX(-500%);
   }
   to {
     transform: translateX(1000%);
