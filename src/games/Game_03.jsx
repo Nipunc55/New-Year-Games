@@ -17,6 +17,7 @@ export default function Game_03() {
   const [buttonClick, setClickStatus] = useState(false)
   const [gameOver, setGameOver] = useState(false)
   const [scoreStatus, setScoreStatus] = useState(false)
+  const [currentScore, setCurrentScore] = useState(0)
 
   useEffect(() => {
     const image = new Image()
@@ -49,6 +50,7 @@ export default function Game_03() {
 
     if (gapEyeSpot < eyeElement.offsetWidth / 2) {
       const score = Math.floor(10000 / gapEyeSpot)
+      setCurrentScore(score)
       setScore((preScore) => preScore + score)
       setScoreStatus(true)
       // console.log('success', 1 / (currentEyePositon - blankSpotXContainer))
@@ -71,6 +73,7 @@ export default function Game_03() {
     setGameOver(false)
     setRound(3)
     setScore(0)
+    setClickStatus(false)
 
     Animation('')
   }
@@ -79,12 +82,13 @@ export default function Game_03() {
       setGameOver(true)
     }
   }, [round])
+
   const mouseClick = (event) => {
     // console.log(event.clientX)
   }
   return (
     <div onClick={mouseClick} className={styles.backGround}>
-      <TextEffect show={scoreStatus} score={score} />
+      <TextEffect score={currentScore} show={scoreStatus} />
       <Score score={score} round={round} />
       <GamePopUp score={score} show={gameOver} resetButton={RestartGame} />
       <div className={styles.buttonContainer}>
@@ -101,6 +105,7 @@ export default function Game_03() {
           <button
             onClick={() => {
               Animation('')
+              setScoreStatus(false)
               setClickStatus(false)
             }}
             className={styles.button}

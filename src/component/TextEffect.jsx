@@ -14,7 +14,7 @@ export default function TextEffect(props) {
     <>
       {props.show != true ? null : (
         <div id="text-effect-container" className={styles.textEffect}>
-          <h1>{props.score}</h1>
+          <h1 className={styles.scoreText}>{props.score}</h1>
         </div>
       )}
     </>
