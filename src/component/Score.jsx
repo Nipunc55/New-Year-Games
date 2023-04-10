@@ -13,26 +13,32 @@ function Score(props) {
     <>
       {' '}
       <div className={styles.buttonContainer}>
-        {props.strikeStatus == true ? (
-          <button
-            className={styles.button}
-            onClick={() => {
-              props.PlayAgain()
-            }}
-          >
-            Try Again
-          </button>
-        ) : (
-          <button
-            disabled={props.strikeStatus}
-            className={styles.button}
-            onClick={() => {
-              props.HandleStrike()
-            }}
-          >
-            Strike
-          </button>
-        )}
+        {props.strikeButton == true ? (
+          <>
+            {' '}
+            {props.strikeStatus == true ? (
+              <button
+                className={styles.button}
+                onClick={() => {
+                  props.PlayAgain()
+                }}
+              >
+                Try Again
+              </button>
+            ) : (
+              <button
+                disabled={props.strikeStatus}
+                className={styles.button}
+                onClick={() => {
+                  props.HandleStrike()
+                }}
+              >
+                Strike
+              </button>
+            )}
+          </>
+        ) : null}
+
         <div className={styles.scoreCover}>
           <div className={styles.count}>
             Score: {props.score} Round: {props.round}

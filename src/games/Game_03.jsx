@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styles from '../styles/Game_3.module.css'
 import eyeImage from '../assets/images/game_3/eye.png'
 import bgImage from '../assets/images/game_3/board.png'
+import Score from '../component/Score'
 
 export default function Game_03() {
   const [position, setPosition] = useState({ x: 419, y: 210 })
@@ -9,6 +10,9 @@ export default function Game_03() {
   const [imageHeight, setImageHeight] = useState(0)
   const [blankSpotXContainer, setBlankSpotXContainer] = useState(0)
   const [blankSpotYContainer, setBlankSpotYContainer] = useState(0)
+  const [score, setScore] = useState(0)
+  const [round, setRound] = useState(3)
+  const [buttonClick, setClickStatus] = useState(false)
 
   useEffect(() => {
     const image = new Image()
@@ -30,34 +34,35 @@ export default function Game_03() {
     }
   }, [])
 
-  const handleClick = (event) => {
+  const handleClick = () => {
     // Get the mouse position relative to the viewport
 
     const eyeElement = document.getElementById('eye-image')
     StopAnimation(eyeElement)
     const x = event.clientX
     const y = event.clientY
-    console.log('initial position :', blankSpotXContainer, blankSpotYContainer)
+    // console.log('initial position :', blankSpotXContainer, blankSpotYContainer)
     // Log the mouse position to the console
-    console.log(`Mouse clicked at (${x}, ${y})`)
-    console.log(
-      'current position of eye:',
-      getCurrentPositionOf(eyeElement),
-      eyeElement.offsetWidth,
-    )
+
+    // console.log(
+    //   'current position of eye:',
+    //   getCurrentPositionOf(eyeElement),
+    //   eyeElement.offsetWidth,
+    // )
     const currentEyePositon = getCurrentPositionOf(eyeElement)
     if (
       currentEyePositon <= blankSpotXContainer + eyeElement.offsetWidth / 2 &&
       currentEyePositon >= blankSpotXContainer
     ) {
-      console.log('success')
+      setScore((preScore) => preScore + 100)
+      console.log('success', 1 / (currentEyePositon - blankSpotXContainer))
     } else {
-      console.log('does not match')
+      setRound((preRound) => preRound - 1)
+      console.log('does not match', round)
     }
   }
   function getCurrentPositionOf(element) {
     const container = document.getElementById('container')
-
     const rect = element.getBoundingClientRect()
     const left = rect.left - container.getBoundingClientRect().left
     return left // the current X position of the element
@@ -65,24 +70,30 @@ export default function Game_03() {
   const StopAnimation = (element) => {
     element.style.animationPlayState = 'paused'
   }
+  useEffect(() => {
+    console.log(buttonClick)
+  }, [buttonClick])
 
-  // useEffect(() => {
-  //   let direction = 1
-  //   let speed = 1
-  //   let position = 0
-  //   const animatePendulum = () => {
-  //     position += 0.01
-  //     console.log('animating')
-  //     setBlankSpotXContainer((preX) => {
-  //       console.log(preX)
-  //       preX + position
-  //     })
-  //     window.requestAnimationFrame(animatePendulum)
-  //   }
-  //   animatePendulum()
-  // }, [])
   return (
-    <div onClick={handleClick} className={styles.backGround}>
+    <div className={styles.backGround}>
+      <Score score={score} round={round} />
+      <div className={styles.buttonContainer}>
+        {buttonClick == true ? (
+          <button onClick={setClickStatus(false)} className={styles.button}>
+            TryAgain
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              handleClick()
+              setClickStatus(true)
+            }}
+            className={styles.button}
+          >
+            Mark
+          </button>
+        )}
+      </div>
       <div id="container" className={styles.gameWindow}>
         <img
           id="eye-image"

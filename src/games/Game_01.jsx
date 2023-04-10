@@ -114,6 +114,7 @@ function Game_01() {
         <div className={styles.hammer} id={styles.hammer}></div>
       </div>
       <Score
+        strikeButton={true}
         strikeStatus={strikeStatus}
         PlayAgain={PlayAgain}
         HandleStrike={handleStrike}
