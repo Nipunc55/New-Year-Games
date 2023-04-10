@@ -11,7 +11,7 @@ import GamePopUp from '../component/GameOverPopUp'
 import LoadingBar from '../component/LoadingBar'
 
 const { idle, hit, duck } = { idle: 'idle', hit: 'hit', duck: 'duck' }
-const timeIntervals = [400, 600, 1000, 1500, 2000, 3000, 2500]
+const timeIntervals = [1500, 2000, 3000, 2500]
 
 function Game_02() {
   const [leftPlayer, setLeftPlayer] = useState(idleImgLeft)
