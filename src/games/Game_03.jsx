@@ -3,6 +3,7 @@ import styles from '../styles/Game_3.module.css'
 import eyeImage from '../assets/images/game_3/eye.png'
 import bgImage from '../assets/images/game_3/board.png'
 import Score from '../component/Score'
+import GamePopUp from '../component/GameOverPopUp'
 
 export default function Game_03() {
   const [position, setPosition] = useState({ x: 419, y: 210 })
@@ -13,6 +14,7 @@ export default function Game_03() {
   const [score, setScore] = useState(0)
   const [round, setRound] = useState(3)
   const [buttonClick, setClickStatus] = useState(false)
+  const [gameOver, setGameOver] = useState(false)
 
   useEffect(() => {
     const image = new Image()
@@ -35,21 +37,13 @@ export default function Game_03() {
   }, [])
 
   const handleClick = () => {
-    // Get the mouse position relative to the viewport
+    setClickStatus(true)
 
     const eyeElement = document.getElementById('eye-image')
-    StopAnimation(eyeElement)
-    const x = event.clientX
-    const y = event.clientY
-    // console.log('initial position :', blankSpotXContainer, blankSpotYContainer)
-    // Log the mouse position to the console
+    Animation('paused')
 
-    // console.log(
-    //   'current position of eye:',
-    //   getCurrentPositionOf(eyeElement),
-    //   eyeElement.offsetWidth,
-    // )
     const currentEyePositon = getCurrentPositionOf(eyeElement)
+    console.log('success', currentEyePositon, blankSpotXContainer)
     if (
       currentEyePositon <= blankSpotXContainer + eyeElement.offsetWidth / 2 &&
       currentEyePositon >= blankSpotXContainer
@@ -67,30 +61,48 @@ export default function Game_03() {
     const left = rect.left - container.getBoundingClientRect().left
     return left // the current X position of the element
   }
-  const StopAnimation = (element) => {
-    element.style.animationPlayState = 'paused'
+  const Animation = (status) => {
+    const eyeElement = document.getElementById('eye-image')
+    eyeElement.style.animationPlayState = status
+  }
+  const RestartGame = () => {
+    setGameOver(false)
+    setRound(3)
+    setScore(0)
+
+    Animation('')
   }
   useEffect(() => {
-    console.log(buttonClick)
-  }, [buttonClick])
-
+    if (round < 1) {
+      setGameOver(true)
+    }
+  }, [round])
+  const mouseClick = (event) => {
+    console.log(event.clientX, event.clientY)
+  }
   return (
-    <div className={styles.backGround}>
+    <div onClick={mouseClick} className={styles.backGround}>
       <Score score={score} round={round} />
+      <GamePopUp score={score} show={gameOver} resetButton={RestartGame} />
       <div className={styles.buttonContainer}>
-        {buttonClick == true ? (
-          <button onClick={setClickStatus(false)} className={styles.button}>
-            TryAgain
-          </button>
-        ) : (
+        {buttonClick != true ? (
           <button
             onClick={() => {
               handleClick()
-              setClickStatus(true)
             }}
             className={styles.button}
           >
             Mark
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              Animation('')
+              setClickStatus(false)
+            }}
+            className={styles.button}
+          >
+            TryAgain
           </button>
         )}
       </div>

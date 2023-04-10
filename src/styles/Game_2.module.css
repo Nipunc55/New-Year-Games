@@ -1,5 +1,5 @@
 .container {
-  background-image: url('../assets/images/game_2/k-bg-min.png');
+  background-image: url('../assets/images/game_2/k-bg-min.webp');
   background-size: cover;
   background-color: rgb(0, 0, 0);
   position: absolute;
@@ -25,9 +25,9 @@
   align-items: center;
 }
 .gameBack {
+  background-image: url('../assets/images/game_2/bg.webp');
   width: 800px;
   height: 350px;
-  background-image: url('../assets/images/game_2/bg.png');
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;

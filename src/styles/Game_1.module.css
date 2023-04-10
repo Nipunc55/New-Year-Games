@@ -7,7 +7,7 @@
 }
 
 .container {
-  background-image: url('../assets/images/bg_01.png');
+  background-image: url('../assets/images/Game_1/bg_01.webp');
   background-size: cover;
   background-color: rgb(0, 0, 0);
   position: absolute;
@@ -45,7 +45,7 @@
   top: 30%;
   width: 8%;
   height: 60%;
-  background-image: url('../assets/images/stick.png');
+  background-image: url('../assets/images/Game_1/stick.webp');
 
   background-size: cover;
 

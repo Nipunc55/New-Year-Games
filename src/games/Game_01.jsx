@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react'
 import styles from '../styles/Game_1.module.css'
-import destroyedTargetImage from '../assets/images/pot2.png'
-import candyPotImage from '../assets/images/pot-candy.png'
-import targetImage from '../assets/images/pot1.png'
+import destroyedTargetImage from '../assets/images/game_1/pot2.webp'
+import candyPotImage from '../assets/images/game_1/pot-candy.webp'
+import targetImage from '../assets/images/game_1/pot1.webp'
 import GamePopUp from '../component/GameOverPopUp'
 import Score from '../component/Score'
 
