@@ -18,6 +18,7 @@ export default function Game_03() {
   const [gameOver, setGameOver] = useState(false)
   const [scoreStatus, setScoreStatus] = useState(false)
   const [currentScore, setCurrentScore] = useState(0)
+  const [gameOverMassage, setGameOverMassage] = useState('')
 
   useEffect(() => {
     const image = new Image()
@@ -80,6 +81,7 @@ export default function Game_03() {
   useEffect(() => {
     if (round < 1) {
       setGameOver(true)
+      setGameOverMassage('GAME OVER')
     }
   }, [round])
 
@@ -90,7 +92,12 @@ export default function Game_03() {
     <div onClick={mouseClick} className={styles.backGround}>
       <TextEffect score={currentScore} show={scoreStatus} />
       <Score score={score} round={round} />
-      <GamePopUp score={score} show={gameOver} resetButton={RestartGame} />
+      <GamePopUp
+        score={score}
+        status={gameOverMassage}
+        show={gameOver}
+        resetButton={RestartGame}
+      />
       <div className={styles.buttonContainer}>
         {buttonClick != true ? (
           <button
