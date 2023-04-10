@@ -137,3 +137,7 @@
     }
   }
 }
+.fullScreenButton {
+  position: absolute;
+  bottom: 0;
+}
