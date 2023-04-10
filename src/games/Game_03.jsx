@@ -4,6 +4,7 @@ import eyeImage from '../assets/images/game_3/eye.png'
 import bgImage from '../assets/images/game_3/board.png'
 import Score from '../component/Score'
 import GamePopUp from '../component/GameOverPopUp'
+import TextEffect from '../component/TextEffect'
 
 export default function Game_03() {
   const [position, setPosition] = useState({ x: 419, y: 210 })
@@ -15,6 +16,7 @@ export default function Game_03() {
   const [round, setRound] = useState(3)
   const [buttonClick, setClickStatus] = useState(false)
   const [gameOver, setGameOver] = useState(false)
+  const [scoreStatus, setScoreStatus] = useState(false)
 
   useEffect(() => {
     const image = new Image()
@@ -22,7 +24,7 @@ export default function Game_03() {
     image.onload = () => {
       setImageWidth(image.naturalWidth)
       setImageHeight(image.naturalHeight)
-      const blankSpotX = 210 // replace with actual x-coordinate of blank spot
+      const blankSpotX = 220 // replace with actual x-coordinate of blank spot
       const blankSpotY = 90 // replace with actual y-coordinate of blank spot
       const containerWidth = document.getElementById('container').offsetWidth
       const containerHeight = document.getElementById('container').offsetHeight
@@ -43,22 +45,22 @@ export default function Game_03() {
     Animation('paused')
 
     const currentEyePositon = getCurrentPositionOf(eyeElement)
-    console.log('success', currentEyePositon, blankSpotXContainer)
-    if (
-      currentEyePositon <= blankSpotXContainer + eyeElement.offsetWidth / 2 &&
-      currentEyePositon >= blankSpotXContainer
-    ) {
-      setScore((preScore) => preScore + 100)
-      console.log('success', 1 / (currentEyePositon - blankSpotXContainer))
+    const gapEyeSpot = Math.abs(currentEyePositon - blankSpotXContainer)
+
+    if (gapEyeSpot < eyeElement.offsetWidth / 2) {
+      const score = Math.floor(10000 / gapEyeSpot)
+      setScore((preScore) => preScore + score)
+      setScoreStatus(true)
+      // console.log('success', 1 / (currentEyePositon - blankSpotXContainer))
     } else {
       setRound((preRound) => preRound - 1)
-      console.log('does not match', round)
     }
   }
   function getCurrentPositionOf(element) {
     const container = document.getElementById('container')
-    const rect = element.getBoundingClientRect()
-    const left = rect.left - container.getBoundingClientRect().left
+    const containerLeft = container.getBoundingClientRect().left
+    const elementLeft = element.getBoundingClientRect().left
+    const left = elementLeft - containerLeft
     return left // the current X position of the element
   }
   const Animation = (status) => {
@@ -78,10 +80,11 @@ export default function Game_03() {
     }
   }, [round])
   const mouseClick = (event) => {
-    console.log(event.clientX, event.clientY)
+    // console.log(event.clientX)
   }
   return (
     <div onClick={mouseClick} className={styles.backGround}>
+      <TextEffect show={scoreStatus} score={score} />
       <Score score={score} round={round} />
       <GamePopUp score={score} show={gameOver} resetButton={RestartGame} />
       <div className={styles.buttonContainer}>

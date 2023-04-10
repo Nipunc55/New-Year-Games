@@ -18,6 +18,63 @@ function Game_01() {
   const [gameOver, setGameOver] = useState(false)
   const [score, setScore] = useState(0)
   const [round, setRound] = useState(3)
+  //screen rotation function
+  useEffect(() => {
+    // const handleOrientationChange = () => {
+    //   if (screen.orientation.angle === 90 || screen.orientation.angle === -90) {
+    //     // Rotate the screen to portrait orientation
+    //     screen.orientation.lock('portrait')
+    //   } else {
+    //     // Rotate the screen to landscape orientation
+    //     screen.orientation.lock('landscape')
+    //   }
+    // }
+
+    // // Add an event listener to detect changes in orientation
+    // window.addEventListener('orientationchange', handleOrientationChange)
+
+    // // Lock the screen to landscape orientation on mount
+    // screen.orientation.lock('landscape')
+
+    // // Remove the event listener on unmount
+    // return () => {
+    //   window.removeEventListener('orientationchange', handleOrientationChange)
+    // }
+    // Check if the screen width is less than 768 pixels
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      if (typeof screen.orientation !== 'undefined') {
+        screen.orientation
+          .lock('landscape')
+          .then(function () {
+            console.log('locked')
+          })
+          .catch(function (error) {
+            console.log('not working')
+          })
+        // screen.orientation API is supported
+      } else {
+        // screen.orientation API is not supported
+      }
+
+      // if (!screen.orientation) {
+      //   // Unlock the screen orientation before locking it
+      //   screen.orientation
+      //     .unlock()
+      //     .then(() => {
+      //       // screen.orientation.lock('landscape')
+      //       // Lock the screen orientation to landscape on mobile devices
+      //       if (/Mobi/.test(navigator.userAgent)) {
+      //         screen.orientation.lock('landscape')
+      //       }
+      //     })
+      //     .catch((error) => {
+      //       console.error('Failed to unlock screen orientation:', error)
+      //     })
+      // } else {
+      //   console.error('Screen orientation API is not supported')
+      // }
+    }
+  }, [])
 
   const ref = useRef()
   const openPopup = () => ref.current.open()
