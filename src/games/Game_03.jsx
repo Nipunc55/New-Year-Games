@@ -22,6 +22,7 @@ export default function Game_03() {
   function SendResult() {
     let result = { score: score, gameID: 3 }
     let resultString = JSON.stringify(result)
+
     // Send message to parent window
     window.parent.postMessage(resultString, '*')
   }

@@ -27,6 +27,7 @@ function Game_01() {
   function SendResult() {
     let result = { score: score, gameID: 1 }
     let resultString = JSON.stringify(result)
+   
     // Send message to parent window
     window.parent.postMessage(resultString, '*')
   }

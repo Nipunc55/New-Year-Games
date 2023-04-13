@@ -71,6 +71,7 @@ function Game_02() {
       setGameOverMassage('Game Over')
       setGameOver(true)
       setGameStart(false)
+      SendResult()
     }
   }, [round])
 
