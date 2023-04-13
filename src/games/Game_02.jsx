@@ -34,14 +34,13 @@ function Game_02() {
     let intervalId
     let hitFrequnt =
       timeIntervals[Math.floor(Math.random() * timeIntervals.length)]
-    console.log('uvgucv')
+
     if (!gameOver && gameStart) {
       // hitFrequnt = Math.random() * 1000
-      console.log()
+
       intervalId = setInterval(() => {
         hitFrequnt =
           timeIntervals[Math.floor(Math.random() * timeIntervals.length)]
-        console.log(hitFrequnt)
 
         setTimeout(() => {
           Hit(hitImgRight, idleImgRight, setRightPlayer, setPlayerStatusR, hit)
