@@ -80,6 +80,7 @@ function Game_02() {
         setGameOverMassage('You Won')
         setGameOver(true)
         setGameStart(false)
+        SendResult()
       }
     }
   }, [score])
