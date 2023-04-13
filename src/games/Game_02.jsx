@@ -24,7 +24,12 @@ function Game_02() {
   const [gameStart, setGameStart] = useState(false)
   const [gameOverMassage, setGameOverMassage] = useState('')
   const [isDuckPressed, setIsPressed] = useState(false)
-
+  function SendResult() {
+    let result = { score: score, gameID: 2 }
+    let resultString = JSON.stringify(result)
+    // Send message to parent window
+    window.parent.postMessage(resultString, '*')
+  }
   useEffect(() => {
     let intervalId
     let hitFrequnt =

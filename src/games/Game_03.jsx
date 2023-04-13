@@ -19,7 +19,12 @@ export default function Game_03() {
   const [scoreStatus, setScoreStatus] = useState(false)
   const [currentScore, setCurrentScore] = useState(0)
   const [gameOverMassage, setGameOverMassage] = useState('')
-
+  function SendResult() {
+    let result = { score: score, gameID: 3 }
+    let resultString = JSON.stringify(result)
+    // Send message to parent window
+    window.parent.postMessage(resultString, '*')
+  }
   useEffect(() => {
     const image = new Image()
     image.src = bgImage
@@ -80,9 +85,9 @@ export default function Game_03() {
   }
   useEffect(() => {
     if (round < 1) {
-       setGameOverMassage('GAME OVER')
+      setGameOverMassage('GAME OVER')
       setGameOver(true)
-     
+      SendResult()
     }
   }, [round])
 

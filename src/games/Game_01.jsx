@@ -24,10 +24,16 @@ function Game_01() {
   const ref = useRef()
   const openPopup = () => ref.current.open()
   const closePopup = () => ref.current.close()
-
+  function SendResult() {
+    let result = { score: score, gameID: 1 }
+    let resultString = JSON.stringify(result)
+    // Send message to parent window
+    window.parent.postMessage(resultString, '*')
+  }
   useEffect(() => {
     if (round < 1) {
       setGameOver(true)
+      SendResult()
     }
   }, [round])
   function getCurrentPosition(element) {
