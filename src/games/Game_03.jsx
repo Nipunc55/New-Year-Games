@@ -80,8 +80,9 @@ export default function Game_03() {
   }
   useEffect(() => {
     if (round < 1) {
+       setGameOverMassage('GAME OVER')
       setGameOver(true)
-      setGameOverMassage('GAME OVER')
+     
     }
   }, [round])
 

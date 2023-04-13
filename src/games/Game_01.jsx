@@ -5,6 +5,7 @@ import candyPotImage from '../assets/images/game_1/pot-candy.webp'
 import targetImage from '../assets/images/game_1/pot1.webp'
 import GamePopUp from '../component/GameOverPopUp'
 import Score from '../component/Score'
+import TextEffect from '../component/TextEffect'
 
 function Game_01() {
   const [image, setImage] = useState(targetImage)
@@ -12,6 +13,7 @@ function Game_01() {
   const [destroyedImage, setDesImage] = useState('')
   const [hammerPosition, setHammerPosition] = useState(0)
   const [hammerElement, setHammerElement] = useState()
+  const [scoreStatus, setScoreStatus] = useState(false)
 
   const [popupMsg, SetPoupMassage] = useState()
   //point system
@@ -48,6 +50,7 @@ function Game_01() {
 
         PlayStrikeAnimation(element)
         if (result) {
+          setScoreStatus(true)
           ChangeImage(element, candyPotImage)
           setScore((prevScore) => prevScore + 100)
           SetPoupMassage('you Won!')
@@ -76,6 +79,7 @@ function Game_01() {
     setScore(0)
   }
   const PlayAgain = () => {
+    setScoreStatus(false)
     setGameOver(false)
     setStrikeButtonStatus(false)
     SetPoupMassage('')
@@ -101,20 +105,20 @@ function Game_01() {
     if (number == randomNum) return true
     return false
   }
-  const fullScreen = () => {
-    try {
-      if (document.fullscreenEnabled) {
-        if (document.fullscreenElement === null) {
-          document.documentElement.requestFullscreen()
-          screen.orientation.lock('landscape')
-        } else {
-          document.exitFullscreen()
-        }
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // const fullScreen = () => {
+  //   try {
+  //     if (document.fullscreenEnabled) {
+  //       if (document.fullscreenElement === null) {
+  //         document.documentElement.requestFullscreen()
+  //         screen.orientation.lock('landscape')
+  //       } else {
+  //         document.exitFullscreen()
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   return (
     <div id="container" className={styles.App}>
@@ -127,6 +131,7 @@ function Game_01() {
         <img src={image} alt="" className={styles.target} id={styles.target4} />
         <div className={styles.hammer} id={styles.hammer}></div>
       </div>
+
       <Score
         strikeButton={true}
         strikeStatus={strikeStatus}
@@ -135,6 +140,7 @@ function Game_01() {
         score={score}
         round={round}
       />
+      <TextEffect score={'100+'} show={scoreStatus} />
     </div>
   )
 }
