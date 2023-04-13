@@ -110,9 +110,6 @@
   text-transform: uppercase;
 }
 @media (max-width: 800px) {
-  .container {
-    height: 60% !important;
-  }
   .buttonContainer {
     display: flex;
     padding-left: 5%;
