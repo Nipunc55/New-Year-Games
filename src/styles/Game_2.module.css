@@ -47,6 +47,8 @@
     width: 300px !important;
   }
   .gameBack {
+    position: relative;
+    top: 30%;
     width: 600px;
     height: 260px;
   }
