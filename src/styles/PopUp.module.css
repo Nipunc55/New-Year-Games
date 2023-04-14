@@ -10,25 +10,25 @@
   justify-content: center;
   align-items: center;
   z-index: 10;
+  height: 100%;
+  width: 100%;
 }
 
 .popup {
   z-index: 10;
-  position: absolute;
-  top: 20%;
+  position: relative;
+  /* top: 20%; */
   /* background-color: #fff;
   padding: 20px;
   border-radius: 5px;
   text-align: center;
   position: relative; */
+  width: 80%;
+  height: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.popup h2 {
-  margin-top: 0;
 }
 
 .popup button {

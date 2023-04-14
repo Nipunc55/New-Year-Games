@@ -1,6 +1,6 @@
 .textEffect {
   position: absolute;
-  z-index: 10;
+  z-index: 4;
   animation: highlight 3s ease-in-out forwards;
 }
 @keyframes highlight {
