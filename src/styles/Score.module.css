@@ -19,6 +19,7 @@
 .count {
   position: fixed;
   font-weight: bold;
+  font-size: 60%;
   right: 5%;
   top: 5%;
   background-color: rgb(252, 44, 44);
