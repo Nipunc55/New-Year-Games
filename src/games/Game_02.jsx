@@ -175,6 +175,7 @@ function Game_02() {
                     Hit
                   </button>
                   <button
+                    className={styles.controllerButtons}
                     onTouchStart={() => setIsPressed(true)}
                     onTouchEnd={() => setIsPressed(false)}
                     onMouseDown={() => setIsPressed(true)}
